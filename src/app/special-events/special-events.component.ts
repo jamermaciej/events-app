@@ -1,3 +1,4 @@
+import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./special-events.component.scss']
 })
 export class SpecialEventsComponent implements OnInit {
+  speciaEvents = [];
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
+    this.eventService.getSpecialEvents().subscribe(
+      res => this.speciaEvents = res,
+      err => console.log(err)
+    );
   }
 
 }
