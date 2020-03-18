@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./special-events.component.scss']
 })
 export class SpecialEventsComponent implements OnInit {
-  speciaEvents = [];
+  specialEvents = [];
 
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.eventService.getSpecialEvents().subscribe(
-      res => this.speciaEvents = res,
+      res => this.specialEvents = res,
       err => console.log(err)
     );
   }
