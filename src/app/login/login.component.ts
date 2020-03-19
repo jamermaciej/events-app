@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
+  errorMessage: string;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.auth.loginUser(this.loginUserData).subscribe(
       res => console.log(res),
-      err => console.log(err)
+      err => this.errorMessage = err.error
     );
   }
 }
