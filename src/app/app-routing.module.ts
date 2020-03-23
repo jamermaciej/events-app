@@ -1,3 +1,4 @@
+import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventsComponent
+  },
+  {
+    path: 'events/add',
+    component: AddEventComponent
   },
   {
     path: 'special',

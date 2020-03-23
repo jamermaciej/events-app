@@ -16,4 +16,8 @@ export class EventService {
   getSpecialEvents() {
     return this.http.get<any>(`${this.apiUrl}/special`);
   }
+
+  addEvent(event) {
+    return this.http.post<any>(`${this.apiUrl}/events`, event);
+  }
 }
