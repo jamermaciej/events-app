@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'events/add',
-    component: AddEventComponent
+    component: AddEventComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'special',
