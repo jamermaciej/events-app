@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -18,4 +19,14 @@ export class EventsComponent implements OnInit {
     );
   }
 
+  removeEvent(id: number) {
+    this.eventService.removeEvent(id).subscribe(
+      res => {
+        console.log(res);
+        location.reload();
+      },
+      err => {
+        console.log(err);
+      });
+  }
 }

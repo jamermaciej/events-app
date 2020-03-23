@@ -1,13 +1,16 @@
 <div class="row mt-5">
     <div class="col-md-4 mb-3" *ngFor="let event of events">
       <div class="card text-center">
-        <div class="card-body">
+        <div class="card-header">
           <h5 class="card-title">{{event.name}}</h5>
+        </div>
+        <div class="card-body">
           <p class="card-text">{{event.description}}</p>
           <a href="#" class="btn btn-primary">Buy Tickets</a>
         </div>
         <div class="card-footer text-muted">
-          {{event.date | date:'shortDate'}}
+          <div class="card-date">{{event.date | date:'shortDate'}}</div>
+          <button class="btn btn-danger mt-3" (click)="removeEvent(event._id)">Delete</button>
         </div>
       </div>
     </div>

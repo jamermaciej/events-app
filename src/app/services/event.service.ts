@@ -20,4 +20,8 @@ export class EventService {
   addEvent(event) {
     return this.http.post<any>(`${this.apiUrl}/events`, event);
   }
+
+  removeEvent(id: number) {
+    return this.http.delete<any>(`${this.apiUrl}/events/${id}`);
+  }
 }
