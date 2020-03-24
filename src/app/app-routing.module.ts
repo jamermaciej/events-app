@@ -1,3 +1,4 @@
+import { UserEventComponent } from './user-event/user-event.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './register/register.component';
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'events/add',
     component: AddEventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'events/:id',
+    component: UserEventComponent,
     canActivate: [AuthGuard]
   },
   {

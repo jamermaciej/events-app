@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddEventComponent } from './add-event/add-event.component';
+import { UserEventComponent } from './user-event/user-event.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddEventComponent } from './add-event/add-event.component';
     LoginComponent,
     EventsComponent,
     SpecialEventsComponent,
-    AddEventComponent
+    AddEventComponent,
+    UserEventComponent
   ],
   imports: [
     BrowserModule,

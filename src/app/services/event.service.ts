@@ -13,6 +13,10 @@ export class EventService {
     return this.http.get<any>(`${this.apiUrl}/events`);
   }
 
+  getEvent(userId: string) {
+    return this.http.get<any>(`${this.apiUrl}/events/${userId}`);
+  }
+
   getSpecialEvents() {
     return this.http.get<any>(`${this.apiUrl}/special`);
   }
@@ -21,7 +25,7 @@ export class EventService {
     return this.http.post<any>(`${this.apiUrl}/events`, event);
   }
 
-  removeEvent(id: number) {
+  removeEvent(id: string) {
     return this.http.delete<any>(`${this.apiUrl}/events/${id}`);
   }
 }

@@ -12,7 +12,11 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/special" routerLinkActive="active">Members</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/events/' + userId" routerLinkActive="active">User Events</a>
+      </li>
     </ul>
+    <div class="navbar-info text-muted" *ngIf="userEmail">Witaj, {{ userEmail }} | </div>
     <ul class="navbar-nav">
         <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
         <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/register" routerLinkActive="active">Register</a>

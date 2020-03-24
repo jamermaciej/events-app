@@ -12,9 +12,15 @@ export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean>;
   public isLoggedIn: Observable<boolean>;
 
+  private userSubject: BehaviorSubject<any>;
+  public user: Observable<any>;
+
   constructor(private http: HttpClient, private router: Router) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(this.loggedIn());
     this.isLoggedIn = this.isLoggedInSubject.asObservable();
+
+    this.userSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user')));
+    this.user = this.userSubject.asObservable();
   }
 
   getIsLoggedIn(): Observable<boolean> {
@@ -23,6 +29,10 @@ export class AuthService {
 
   public get isLoggedInValue(): boolean {
     return this.isLoggedInSubject.value;
+  }
+
+  public get userValue(): any {
+    return this.userSubject.value;
   }
 
   registerUser(user) {
@@ -41,16 +51,21 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, user).pipe(
       map(res => {
         const token = res.token;
+        const userData = res.userData;
         const isLoggedIn = !!token;
         this.isLoggedInSubject.next(isLoggedIn);
+        this.userSubject.next(userData);
         localStorage.setItem('token', token);
-        this.router.navigate(['/special']);
+        localStorage.setItem('user', JSON.stringify(userData));
+        this.router.navigate([`/events/${userData._id}`]);
       })
     );
   }
 
   logoutUser() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
     this.isLoggedInSubject.next(null);
     this.router.navigate(['/login']);
   }
@@ -62,4 +77,6 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+
 }
