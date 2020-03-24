@@ -1,7 +1,8 @@
 import { AuthService } from './../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-events',
@@ -12,15 +13,17 @@ export class EventsComponent implements OnInit {
   events: [];
   isLoggedIn: boolean;
 
-  constructor(private eventService: EventService, private auth: AuthService) { }
+  constructor(private eventService: EventService, private auth: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe(
-      res => this.events = res,
-      err => console.log(err)
-    );
-
     this.auth.isLoggedIn.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+
+    const userId = this.route.snapshot.paramMap.get('id');
+    if ( userId ) {
+      this.eventService.getEvent(userId).subscribe(events => this.events = events);
+    } else {
+      this.eventService.getEvents().subscribe(events => this.events = events);
+    }
   }
 
   removeEvent(id: string) {
